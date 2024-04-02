@@ -88,25 +88,27 @@
 
                     </div>
                     <div class="weather__info">
-                        <form action="" class="weather__form">
-                            <input class="weather__input" type="text" placeholder="Search city..." id="weatherInput">
-                            <label class="weather__label" for="d1">1 day
-                                <input class="weather__checkbox" type="radio" name="field" id="d1" value="1" checked>
-                                <span class="weather__check-style"></span>
-                            </label>
+                        <form action="" class="weather__form" name="weatherForm">
+                            <div class="weather__parameters">
+                                <h2>Check city name:</h2>
 
-                            <label class="weather__label" for="d5">5 days
-                                <input class="weather__checkbox" type="radio" name="field" id="d5" value="5">
-                                <span class="weather__check-style"></span>
-                            </label>
+                                <input type="text" id="cityInput" placeholder="Check city...">
+
+                                <ul id="suggestions"></ul>
+                            </div>
+                            <div class="weather__period">
+                                <label class="weather__label" for="d1">1 day
+                                    <input class="weather__checkbox" type="radio" name="field" id="d1" value="1"
+                                        checked>
+                                    <span class="weather__check-style"></span>
+                                </label>
+
+                                <label class="weather__label" for="d5">5 days
+                                    <input class="weather__checkbox" type="radio" name="field" id="d5" value="5">
+                                    <span class="weather__check-style"></span>
+                                </label>
+                            </div>
                         </form>
-                    </div>
-                    <div class="weather__parameters">
-                        <h2>Введите город:</h2>
-
-                        <input type="text" id="cityInput" placeholder="Введите город...">
-
-                        <ul id="suggestions"></ul>
                     </div>
                     <div class="weather__grafic">
                         <canvas id="myChart"></canvas>

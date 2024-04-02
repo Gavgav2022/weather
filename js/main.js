@@ -14,6 +14,7 @@ let lon = 100;
 let urlWeather;
 let period = 1;
 const dayOfWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+const formWeather = document.forms.weatherForm;
 
 burger.addEventListener('click', (e) => {
     burger.classList.toggle('active');
@@ -115,7 +116,7 @@ function createChart(lab) {
 const cityInput = document.getElementById('cityInput');
 const suggestions = document.getElementById('suggestions');
 
-cityInput.addEventListener('blur', function () {
+cityInput.addEventListener('input', function () {
     const inputValue = this.value;
 
     // Очистка предыдущих результатов
@@ -126,16 +127,26 @@ cityInput.addEventListener('blur', function () {
         fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${inputValue}`)
             .then(response => response.json())
             .then(data => {
+                let count = 1;
                 data.forEach(city => {
                     const li = document.createElement('li');
+                    li.classList.add('weather__city');
+                    li.setAttribute('lat', city.lat);
+                    li.setAttribute('lon', city.lon);
                     li.textContent = `${city.display_name} [${city.lat}, ${city.lon}]`;
-                    lat = city.lat;
-                    lon = city.lon;
                     urlWeather = `https://api.openweathermap.org/data/3.0/onecall?lat=${lat}&lon=${lon}&lang=ua&units=metric&appid=0945ae1477922f36b0dd171422352f14`;
-                    console.log(lat, lon);
-                    craeteCards();
                     suggestions.appendChild(li);
                 });
+                let location = document.querySelectorAll('.weather__city');
+                for (elem of location) {
+                    elem.addEventListener('click', (e) => {
+                        lat = +e.target.getAttribute('lat');
+                        lon = +e.target.getAttribute('lon');
+                        urlWeather = `https://api.openweathermap.org/data/3.0/onecall?lat=${lat}&lon=${lon}&lang=ua&units=metric&appid=0945ae1477922f36b0dd171422352f14`;
+                        craeteCards();
+                        suggestions.innerHTML = '';
+                    });
+                }
 
             })
             .catch(error => console.error('Ошибка:', error));

@@ -238,8 +238,14 @@ main {
 
 }
 
+.weather__city {
+    cursor: pointer;
+}
+
 .weather__form {
     margin-bottom: 30px;
+    display: flex;
+    justify-content: space-between;
 }
 
 
