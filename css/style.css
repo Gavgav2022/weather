@@ -1,0 +1,263 @@
+html {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.sr-only {
+    overflow: hidden;
+    padding: 0;
+}
+
+.lock {
+    overflow: hidden;
+}
+
+main {
+    padding-top: 130px;
+}
+
+.container {
+    max-width: 1200px;
+    min-width: 360px;
+    margin: 0 auto;
+    padding: 0 15px;
+}
+
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 4;
+    background-color: black;
+    color: white;
+    font-size: 18px;
+}
+
+.header__inner {
+    height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.burger-wrapper {
+    display: none;
+}
+
+.burger {
+    width: 45px;
+    height: 45px;
+    background-color: transparent;
+    border: none;
+    transition: all .3s;
+}
+
+.burger.active .burger__line::after {
+    transform: rotate(45deg);
+    top: 0;
+}
+
+.burger.active .burger__line::before {
+    transform: rotate(-45deg);
+    top: 0;
+}
+
+.burger.active .burger__line {
+    background-color: transparent;
+}
+
+.burger__line {
+    position: relative;
+    display: block;
+    width: 40px;
+    height: 2px;
+    background-color: white;
+    transition: all .3s;
+}
+
+.burger__line::after {
+    position: absolute;
+    content: '';
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 15px;
+    background-color: #fff;
+    transition: all .3s;
+}
+
+.burger__line::before {
+    position: absolute;
+    content: '';
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: -15px;
+    background-color: #fff;
+    transition: all .3s;
+}
+
+.menu {
+    display: flex;
+    align-items: center;
+}
+
+.menu__list {
+    display: flex;
+    gap: 40px;
+    align-items: center;
+}
+
+.menu__item {
+    position: relative;
+}
+
+.menu__link {
+    padding: 5px 10px;
+    z-index: 2;
+}
+
+.menu__sublist {
+    z-index: 1;
+    position: absolute;
+    padding: 10px 15px;
+    top: 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    transform: scale(0);
+    transition: all .3s;
+    font-size: 14px;
+    border-radius: 5px;
+    background-color: rgb(0, 0, 0, 0.75);
+}
+
+
+
+.menu__item-title {
+    display: flex;
+    min-height: 44px;
+    align-items: center;
+    position: relative;
+    transition: all .3s;
+}
+
+.menu__item:hover .menu__sublist {
+    transform: scale(1);
+}
+
+.menu__item-title::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    left: 0;
+    z-index: 2;
+    bottom: -5px;
+    background-color: yellow;
+    transform: scale(0);
+    transition: all .3s;
+}
+
+.menu__item-title:hover::after {
+    transform: scale(1);
+}
+
+.menu__item-title:hover, .menu__sublink:hover {
+    color: yellow;
+}
+
+.header__curt-link {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 175px;
+    height: 60px;
+    background-color: yellow;
+    color: black;
+    box-shadow: 0px 2px 2px 1px white;
+    border-radius: 3px;
+    transition: all .3s;
+}
+
+.header__curt-link:hover {
+    box-shadow: 0px 3px 3px 3px white;
+    color: white;
+    background-color: orange;
+}
+
+.logo {
+    transition: all .3s;
+}
+
+.logo:hover {
+    box-shadow: 0px 2px 4px 4px yellow;
+}
+
+.logo__img {
+    max-height: 70px;
+}
+
+.weather {
+    min-height: 80vh;
+}
+
+.weather__checkbox {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+}
+
+.weather__checkbox:checked+.weather__check-style {
+    background-color: red;
+}
+
+.weather__label {
+    padding: 10px 20px;
+    cursor: pointer;
+    position: relative;
+    z-index: 1;
+    border: 1px solid greenyellow;
+    border-radius: 5px;
+    transition: all .3s;
+}
+
+.weather__check-style {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    transition: all .3s;
+}
+
+.weather__input {
+
+}
+
+.weather__form {
+    margin-bottom: 30px;
+}
+
+
+#cityList {
+    position: absolute;
+    background-color: white;
+    border: 1px solid #ccc;
+    max-height: 150px;
+    overflow-y: auto;
+    width: calc(100% - 2px);
+  }
+  
+  #cityList div {
+    padding: 10px;
+    cursor: pointer;
+  }
+  
+  #cityList div:hover {
+    background-color: #f0f0f0;
+  }
+  
