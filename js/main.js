@@ -4,7 +4,9 @@ let menu = document.querySelector('.menu__list');
 let body = document.querySelector('body');
 let daysCheckbox = document.querySelectorAll('.weather__checkbox');
 let ctx = document.getElementById('myChart');
-let grafic = document.querySelector('.weather__grafic')
+let grafic = document.querySelector('.weather__grafic');
+let weatherParam = document.querySelectorAll('.weather__content-det');
+let nameCity = '';
 let hourly = [];
 let week = [];
 let labels = [];
@@ -13,6 +15,7 @@ let lat = 100;
 let lon = 100;
 let urlWeather;
 let period = 1;
+
 const dayOfWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 const formWeather = document.forms.weatherForm;
 
@@ -45,6 +48,7 @@ async function getWeather() {
         let result = await response.json();
         week = result.daily;
         hourly = result.hourly;
+        weatherToday = result.current;
         return result, hourly;
     } catch (error) {
         console.error(error);
@@ -59,6 +63,14 @@ async function craeteCards() {
         labels = [];
         hour = [];
         let data = new Date().getHours();
+        console.log(weatherToday);
+        weatherParam[0].textContent =  weatherToday.temp;
+        weatherParam[1].textContent =  weatherToday.feels_like;
+        weatherParam[2].textContent =  weatherToday.humidity;
+        weatherParam[3].textContent =  weatherToday.pressure;
+        weatherParam[4].textContent =  weatherToday.wind_speed;
+        weatherParam[5].textContent =  weatherToday.weather[0].main;
+    
         for (let i = 0; i <= 23; i++) {
             hour.push(Math.round(hourly[i].temp));
         }
@@ -69,26 +81,29 @@ async function craeteCards() {
                 labels.push(`${data}:00`);
                 break;
             } else if (data < 24) {
-
+                labels.push(`${data}:00`);
             } else {
                 data = 0;
+                labels.push(`${data}:00`);
             }
-            labels.push(`${data}:00`);
         }
-        weatherClear();
-        createChart(labels);
     } else if (period === 5) {
         labels = [];
         let data = new Date().getDay();
         for (let i = 1; i <= 5; i++) {
             let dayNow = dayOfWeek[data];
+            console.log(data);
             hour.push(Math.round(week[i].temp.eve));
             labels.push(`${dayNow}`);
-            data++;
+            if (data === 7) {
+                data = 0;
+            } else {
+                data++;
+            }
         }
-        weatherClear()
-        createChart(labels);
     }
+    weatherClear();
+    createChart(labels);
 }
 
 function createChart(lab) {
@@ -97,7 +112,7 @@ function createChart(lab) {
         data: {
             labels: lab,
             datasets: [{
-                label: '℃elcium',
+                label: `${nameCity}`,
                 data: hour,
                 borderWidth: 3
             }]
@@ -127,7 +142,6 @@ cityInput.addEventListener('input', function () {
         fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${inputValue}`)
             .then(response => response.json())
             .then(data => {
-                let count = 1;
                 data.forEach(city => {
                     const li = document.createElement('li');
                     li.classList.add('weather__city');
@@ -141,6 +155,7 @@ cityInput.addEventListener('input', function () {
                     elem.addEventListener('click', (e) => {
                         lat = +e.target.getAttribute('lat');
                         lon = +e.target.getAttribute('lon');
+                        nameCity = e.target.textContent;
                         console.log(lat, lon);
                         urlWeather = `https://api.openweathermap.org/data/3.0/onecall?lat=${lat}&lon=${lon}&lang=ua&units=metric&appid=0945ae1477922f36b0dd171422352f14`;
                         craeteCards();

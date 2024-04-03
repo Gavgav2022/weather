@@ -1,5 +1,5 @@
 html {
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-family:Open Sans, Helvetica, sans-serif;
 }
 
 .sr-only {
@@ -11,9 +11,6 @@ html {
     overflow: hidden;
 }
 
-main {
-    padding-top: 130px;
-}
 
 .container {
     max-width: 1200px;
@@ -28,7 +25,7 @@ main {
     left: 0;
     right: 0;
     z-index: 4;
-    background-color: black;
+    background-color: orangered;
     color: white;
     font-size: 18px;
 }
@@ -200,6 +197,9 @@ main {
 
 .weather {
     min-height: 80vh;
+    margin-top: 100px;
+    padding: 40px 0;
+    background-color: #F6F6F8;
 }
 
 .weather__checkbox {
@@ -218,9 +218,9 @@ main {
     padding: 10px 20px;
     cursor: pointer;
     position: relative;
+    background-color: #ccc;
+    
     z-index: 1;
-    border: 1px solid greenyellow;
-    border-radius: 5px;
     transition: all .3s;
 }
 
@@ -231,11 +231,17 @@ main {
     top: 0;
     left: 0;
     z-index: -1;
+    border-radius: 5px;
     transition: all .3s;
 }
 
-.weather__input {
+.weather__label:hover .weather__check-style{
+    box-shadow: 0px 2px 2px 2px gray;
+}
 
+.weather__period {
+    display: flex;
+    align-items: center;
 }
 
 .weather__city {
@@ -243,9 +249,9 @@ main {
 }
 
 .weather__form {
-    margin-bottom: 30px;
     display: flex;
     justify-content: space-between;
+    align-items: start;
 }
 
 
@@ -266,4 +272,57 @@ main {
   #cityList div:hover {
     background-color: #f0f0f0;
   }
+
+  .weather__city-input {
+    margin-bottom: 15px;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    border: red 2px solid;
+    transition: all .3s;
+  }
+
+  .weather__city-input:hover {
+    border: orange 2px solid;
+    box-shadow: 0px 2px 2px 2px gray;
+    background-color: #fff;
+  }
+
+  .weather__city-input:active {
+    border: blue 2px solid;
+    outline: none;
+    box-shadow: 0px 2px 3px 2px gray;
+  }
+
+  .weather__city-input:focus{
+    border: blue 2px solid;
+    outline: none;
+    box-shadow: 0px 2px 3px 2px gray;
+  }
+
+  .weather__search-title {
+    margin-bottom: 20px;
+  }
+
+  .weather__btn-add {
+    padding: 10px 15px;
+    background-color: red;
+    max-height: 40px;
+    border: none;
+    border-radius: 5px;
+    font-size: 14px;
+    line-height: 120%;
+  }
+
+  .weather__grafic {
+    max-width: 100%;
+  }
+
+.weather__main {
+    display: flex;
+    width: 100%;
+}
+
+
+  
   
