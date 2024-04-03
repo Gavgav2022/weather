@@ -87,12 +87,12 @@
                     <div class="weather__head">
 
                     </div>
-                    <div class="weather__info">
                         <form action="" class="weather__form" name="weatherForm">
                             <div class="weather__parameters">
                                 <h2 class="weather__search-title">Enter city name:</h2>
 
-                                <input class="weather__city-input" type="text" id="cityInput" placeholder="Check city...">
+                                <input class="weather__city-input" type="text" id="cityInput"
+                                    placeholder="Check city...">
                             </div>
                             <div class="weather__period">
                                 <label class="weather__label" for="d1">1 day
@@ -108,25 +108,35 @@
                             </div>
                             <button class="weather__btn-add" type="button">Favorit</button>
                         </form>
-                    </div>
+
                     <ul id="suggestions"></ul>
                     <div class="weather__main">
-                        <div class="weather__grafic">
-                            <canvas id="myChart"></canvas>
-                        </div>
                         <div class="weather__content">
-                            <h3 class="weather__conntent-title">Weather now</h3>
+                            <h3 class="weather__content-title">Weather now</h3>
                             <ul class="weather__content-list">
-                                <li class="weather__content-item"><span class="weather__content-subtitle">Temperature:</span> <span class="weather__content-det"></span></li>
-                                <li class="weather__content-item"><span class="weather__content-subtitle">Feels like:</span> <span class="weather__content-det"></span></li>
-                                <li class="weather__content-item"><span class="weather__content-subtitle">Humidity:</span> <span class="weather__content-det"></span></li>
-                                <li class="weather__content-item"><span class="weather__content-subtitle">Pressure:</span> <span class="weather__content-det"></span></li>
-                                <li class="weather__content-item"><span class="weather__content-subtitle">Wind speed:</span> <span class="weather__content-det"></span></li>
-                                <li class="weather__content-item"><span class="weather__content-subtitle">Description:</span> <span class="weather__content-det"></span></li>
+                                <li class="weather__content-item"><span
+                                        class="weather__content-subtitle">Temperature:</span> <span
+                                        class="weather__content-det"></span></li>
+                                <li class="weather__content-item"><span class="weather__content-subtitle">Feels
+                                        like:</span> <span class="weather__content-det"></span></li>
+                                <li class="weather__content-item"><span
+                                        class="weather__content-subtitle">Humidity:</span> <span
+                                        class="weather__content-det"></span></li>
+                                <li class="weather__content-item"><span
+                                        class="weather__content-subtitle">Pressure:</span> <span
+                                        class="weather__content-det"></span></li>
+                                <li class="weather__content-item"><span class="weather__content-subtitle">Wind
+                                        speed:</span> <span class="weather__content-det"></span></li>
+                                <li class="weather__content-item"><span
+                                        class="weather__content-subtitle">Description:</span> <span
+                                        class="weather__content-det"></span></li>
                             </ul>
                         </div>
+                        <div class="weather__grafic">
+                            <canvas class="weather__grafic" id="myChart"></canvas>
+                        </div>
                     </div>
-                    
+
                 </div>
             </div>
         </section>

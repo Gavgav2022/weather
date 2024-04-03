@@ -64,11 +64,11 @@ async function craeteCards() {
         hour = [];
         let data = new Date().getHours();
         console.log(weatherToday);
-        weatherParam[0].textContent =  weatherToday.temp;
-        weatherParam[1].textContent =  weatherToday.feels_like;
-        weatherParam[2].textContent =  weatherToday.humidity;
-        weatherParam[3].textContent =  weatherToday.pressure;
-        weatherParam[4].textContent =  weatherToday.wind_speed;
+        weatherParam[0].textContent =  `${weatherToday.temp} °C`;
+        weatherParam[1].textContent =  `${weatherToday.feels_like} °C`;
+        weatherParam[2].textContent =  `${weatherToday.humidity} %`;
+        weatherParam[3].textContent =  `${weatherToday.pressure} mm.`;
+        weatherParam[4].textContent =  `${weatherToday.wind_speed} m/s.`;
         weatherParam[5].textContent =  weatherToday.weather[0].main;
     
         for (let i = 0; i <= 23; i++) {
@@ -95,7 +95,7 @@ async function craeteCards() {
             console.log(data);
             hour.push(Math.round(week[i].temp.eve));
             labels.push(`${dayNow}`);
-            if (data === 7) {
+            if (data === 6) {
                 data = 0;
             } else {
                 data++;

@@ -315,12 +315,32 @@ html {
   }
 
   .weather__grafic {
-    max-width: 100%;
+   width: 80%;
   }
 
 .weather__main {
     display: flex;
+    justify-content: space-between;
+    gap: 30px;
     width: 100%;
+    height: 100%;
+    padding: 10px 15px;
+    border: 2px dotted black;
+}
+
+.weather__content-title {
+    margin-bottom: 10px;
+}
+
+.weather__content-item {
+    margin-bottom: 10px;
+    text-decoration: underline;
+}
+
+.weather__content-list {
+    padding: 15px;
+    border: 1px solid black;
+    border-radius: 3px;
 }
 
 
