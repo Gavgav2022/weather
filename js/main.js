@@ -57,8 +57,8 @@ async function craeteCards() {
     await getWeather();
     if (period === 1) {
         labels = [];
+        hour = [];
         let data = new Date().getHours();
-        data.g
         for (let i = 0; i <= 23; i++) {
             hour.push(Math.round(hourly[i].temp));
         }
@@ -75,7 +75,7 @@ async function craeteCards() {
             }
             labels.push(`${data}:00`);
         }
-        weatherClear()
+        weatherClear();
         createChart(labels);
     } else if (period === 5) {
         labels = [];
@@ -97,9 +97,9 @@ function createChart(lab) {
         data: {
             labels: lab,
             datasets: [{
-                label: '# Celcium',
+                label: '℃elcium',
                 data: hour,
-                borderWidth: 1
+                borderWidth: 3
             }]
         },
         options: {
@@ -134,7 +134,6 @@ cityInput.addEventListener('input', function () {
                     li.setAttribute('lat', city.lat);
                     li.setAttribute('lon', city.lon);
                     li.textContent = `${city.display_name} [${city.lat}, ${city.lon}]`;
-                    urlWeather = `https://api.openweathermap.org/data/3.0/onecall?lat=${lat}&lon=${lon}&lang=ua&units=metric&appid=0945ae1477922f36b0dd171422352f14`;
                     suggestions.appendChild(li);
                 });
                 let location = document.querySelectorAll('.weather__city');
@@ -142,6 +141,7 @@ cityInput.addEventListener('input', function () {
                     elem.addEventListener('click', (e) => {
                         lat = +e.target.getAttribute('lat');
                         lon = +e.target.getAttribute('lon');
+                        console.log(lat, lon);
                         urlWeather = `https://api.openweathermap.org/data/3.0/onecall?lat=${lat}&lon=${lon}&lang=ua&units=metric&appid=0945ae1477922f36b0dd171422352f14`;
                         craeteCards();
                         suggestions.innerHTML = '';
