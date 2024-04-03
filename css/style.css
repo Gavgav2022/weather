@@ -7,6 +7,10 @@ html {
     padding: 0;
 }
 
+.unvisible {
+    display: none;
+}
+
 .lock {
     overflow: hidden;
 }
@@ -333,6 +337,7 @@ html {
 }
 
 .weather__content-item {
+    text-align: center;
     margin-bottom: 10px;
     text-decoration: underline;
 }
@@ -341,6 +346,16 @@ html {
     padding: 15px;
     border: 1px solid black;
     border-radius: 3px;
+}
+.unvisible {
+    display: none;
+}
+.weather__city-name {
+    background-color: rgb(255, 100, 0, 0.75);
+    text-align: center;
+    border-radius: 8px;
+    padding: 10px;
+    margin-bottom: 10px;
 }
 
 

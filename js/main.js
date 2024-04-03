@@ -5,6 +5,7 @@ let body = document.querySelector('body');
 let daysCheckbox = document.querySelectorAll('.weather__checkbox');
 let ctx = document.getElementById('myChart');
 let grafic = document.querySelector('.weather__grafic');
+let weatherMain = document.querySelector('.weather__main');
 let weatherParam = document.querySelectorAll('.weather__content-det');
 let nameCity = '';
 let hourly = [];
@@ -63,7 +64,6 @@ async function craeteCards() {
         labels = [];
         hour = [];
         let data = new Date().getHours();
-        console.log(weatherToday);
         weatherParam[0].textContent =  `${weatherToday.temp} °C`;
         weatherParam[1].textContent =  `${weatherToday.feels_like} °C`;
         weatherParam[2].textContent =  `${weatherToday.humidity} %`;
@@ -89,6 +89,7 @@ async function craeteCards() {
         }
     } else if (period === 5) {
         labels = [];
+        hour = [];
         let data = new Date().getDay();
         for (let i = 1; i <= 5; i++) {
             let dayNow = dayOfWeek[data];
@@ -147,7 +148,7 @@ cityInput.addEventListener('input', function () {
                     li.classList.add('weather__city');
                     li.setAttribute('lat', city.lat);
                     li.setAttribute('lon', city.lon);
-                    li.textContent = `${city.display_name} [${city.lat}, ${city.lon}]`;
+                    li.textContent = `${city.display_name}`;
                     suggestions.appendChild(li);
                 });
                 let location = document.querySelectorAll('.weather__city');
@@ -155,8 +156,10 @@ cityInput.addEventListener('input', function () {
                     elem.addEventListener('click', (e) => {
                         lat = +e.target.getAttribute('lat');
                         lon = +e.target.getAttribute('lon');
+                        weatherMain.classList.remove('unvisible');
                         nameCity = e.target.textContent;
-                        console.log(lat, lon);
+                        let city = document.querySelector('.weather__city-name');
+                        city.textContent = `Weather now in: ${nameCity}`
                         urlWeather = `https://api.openweathermap.org/data/3.0/onecall?lat=${lat}&lon=${lon}&lang=ua&units=metric&appid=0945ae1477922f36b0dd171422352f14`;
                         craeteCards();
                         suggestions.innerHTML = '';
