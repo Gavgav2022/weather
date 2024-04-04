@@ -7,9 +7,6 @@ html {
     padding: 0;
 }
 
-.unvisible {
-    display: none;
-}
 
 .lock {
     overflow: hidden;
@@ -223,7 +220,6 @@ html {
     cursor: pointer;
     position: relative;
     background-color: #ccc;
-    
     z-index: 1;
     transition: all .3s;
 }
@@ -318,48 +314,94 @@ html {
     line-height: 120%;
   }
 
-  .weather__grafic {
+  .weather__grafics-wrapper {
    width: 80%;
   }
 
-.weather__main {
+  .weather__grafic-container {
     display: flex;
+  }
+
+.weather__card {
     justify-content: space-between;
     gap: 30px;
     width: 100%;
     height: 100%;
-    padding: 10px 15px;
+    padding: 15px;
     background-color: #fff;
     box-shadow: 0px 2px 3px 2px gray;
     border-radius: 5px;
+}
+
+.weather__card {
+    display: flex;
 }
 
 .weather__content-title {
     margin-bottom: 10px;
 }
 
-.weather__content-item {
+.weather__card-item {
     text-align: center;
     margin-bottom: 10px;
     text-decoration: underline;
 }
 
-.weather__content-list {
+.weather__card-list {
     padding: 15px;
     border: 1px solid black;
     border-radius: 3px;
 }
-.unvisible {
+.hide {
     display: none;
 }
-.weather__city-name {
+.weather__card-name {
     background-color: rgb(255, 100, 0, 0.75);
     text-align: center;
     border-radius: 8px;
     padding: 10px;
     margin-bottom: 10px;
 }
+.weather__city {
+    padding: 5px;
+    margin-bottom: 5px;
+    cursor: pointer;
+    transition: all .3s;
+}
 
+.weather__city:hover {
+    background-color: darkgray;
+}
 
+.weather__list-switch {
+    display: flex;
+    margin-right: 15px;
+    justify-content: center;
+}
+
+.weather__switch-button {
+    padding: 5px;
+    border: none;
+    background-color: orange;
+    border-radius: 3px;
+}
+
+.btn-active {
+    background-color: red;
+}
+
+.weather__main-navigation {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 15px;
+}
   
+.weather__item-swither {
+    margin-right: 10px;
+}
+
+.weather__card-remove {
+    justify-self: end;
+}
   
