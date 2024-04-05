@@ -15,49 +15,6 @@ const switcherList = document.querySelector('.weather__list-switch');
 
 let cards = document.querySelector('.weather__cards');
 let cardsArray = document.querySelectorAll('.weather__card');
-let cardHTML = `<li class="weather__card active-card">
-<div class="weather__card-info">
-    <h3 class="weather__card-name"></h3>
-    <ul class="weather__card-list">
-        <li class="weather__card-item"><span
-                class="weather__card-subtitle">Temperature:</span> <span
-                class="weather__card-det"></span></li>
-        <li class="weather__card-item"><span class="weather__card-subtitle">Feels
-                like:</span> <span class="weather__card-det"></span></li>
-        <li class="weather__card-item"><span
-                class="weather__card-subtitle">Humidity:</span>
-            <span class="weather__card-det"></span>
-        </li>
-        <li class="weather__card-item"><span
-                class="weather__card-subtitle">Pressure:</span>
-            <span class="weather__card-det"></span>
-        </li>
-        <li class="weather__card-item"><span class="weather__ardt-subtitle">Wind
-                speed:</span> <span class="weather__card-det"></span></li>
-        <li class="weather__card-item"><span
-                class="weather__card-subtitle">Description:</span> <span
-                class="weather__card-det"></span></li>
-    </ul>
-</div>
-<div class="weather__grafics-wrapper">
-    <div class="weather__grafic-container">
-        <canvas class="weather__grafic" id="myChart"></canvas>
-    </div>
-    <div class="weather__period">
-        <label class="weather__label" for="d1">1 day
-            <input class="weather__checkbox" type="radio" name="field" id="d1" value="1"
-                checked>
-            <span class="weather__check-style"></span>
-        </label>
-
-        <label class="weather__label" for="d5">5 days
-            <input class="weather__checkbox" type="radio" name="field" id="d5"
-                value="5">
-            <span class="weather__check-style"></span>
-        </label>
-    </div>
-</div>
-</li>`;
 
 const suggestions = document.getElementById('suggestions');
 const cityInput = document.querySelector('.weather__city-input');
@@ -358,6 +315,7 @@ function newCardCreator() {
                     value="5">
                 <span class="weather__check-style"></span>
             </label>
+            <button class="weather__btn-add" type="button">Favorit</button>
         </div>
     </div>
     </li>`);

@@ -237,6 +237,7 @@ main {
     padding: 10px 20px;
     cursor: pointer;
     position: relative;
+    margin-right: 20px;
     background-color: #ccc;
     z-index: 1;
     transition: all .3s;
@@ -324,7 +325,8 @@ main {
 
 .weather__btn-add {
     padding: 10px 15px;
-    background-color: red;
+    background-color: blue;
+    color: white;
     max-height: 40px;
     border: none;
     border-radius: 5px;
