@@ -2,8 +2,12 @@ let burger = document.querySelector('.burger');
 let header = document.querySelector('.header');
 let menu = document.querySelector('.menu__list');
 let body = document.querySelector('body');
+const navigationBar = document.querySelector('.weather__main-navigation');
+const removeBtn = document.querySelector('.weather__card-remove');
 
 let grafic;
+let graph;
+let activeCard;
 let weatherToday = [];
 let weatherParam = document.querySelectorAll('.weather__card-det');
 const btnAddCard = document.querySelector('.weather__add-btn');
@@ -79,6 +83,7 @@ burger.addEventListener('click', (e) => {
     body.classList.toggle('lock');
 });
 
+
 cityInput.addEventListener('input', function () {
     let inputValue = cityInput.value;
 
@@ -107,6 +112,7 @@ cityInput.addEventListener('input', function () {
                         nameCity = e.target.textContent;
                         suggestions.innerHTML = '';
                         createCard();
+                        navigationBar.classList.remove('hide');
                     });
                 }
             })
@@ -127,33 +133,59 @@ async function getWeather(latit, longi) {
     }
 };
 
+
 async function createCard() {
-    let activeCard = document.querySelector('.active-card');
+    cardArr = document.querySelectorAll('.weather__card');
+    if (cardArr.length < 1) {
+        newCardCreator();
+    }
+    activeCard = document.querySelector('.active-card');
     activeCard.classList.add('done');
-    console.log(activeCard);
     let weatherParam = activeCard.querySelectorAll('.weather__card-det');
     let cardTitle = activeCard.querySelector('.weather__card-name');
-    let graph = activeCard.querySelector('.weather__grafic');
+    graph = activeCard.querySelector('.weather__grafic');
 
     await getWeather(lat, lon);
-    weatherParam[0].textContent = `${weatherToday.temp} °C`;
-    weatherParam[1].textContent = `${weatherToday.feels_like} °C`;
-    weatherParam[2].textContent = `${weatherToday.humidity} %`;
-    weatherParam[3].textContent = `${weatherToday.pressure} mm.`;
-    weatherParam[4].textContent = `${weatherToday.wind_speed} m/s.`;
-    weatherParam[5].textContent = weatherToday.weather[0].main;
-    cardTitle.textContent = `Weather now in: ${nameCity}`;
+    addToDataArray();
+    weatherParam[0].textContent = `${navigationArray[count].weatherToday.temp} °C`;
+    weatherParam[1].textContent = `${navigationArray[count].weatherToday.feels_like} °C`;
+    weatherParam[2].textContent = `${navigationArray[count].weatherToday.humidity} %`;
+    weatherParam[3].textContent = `${navigationArray[count].weatherToday.pressure} mm.`;
+    weatherParam[4].textContent = `${navigationArray[count].weatherToday.wind_speed} m/s.`;
+    weatherParam[5].textContent = navigationArray[count].weatherToday.weather[0].main;
+    cardTitle.textContent = `Weather now in: ${navigationArray[count].nameCity}`;
     scaleConstructor();
     weatherClear();
+    activeCard = document.querySelector('.active-card');
     graph = activeCard.querySelector('.weather__grafic');
     createChart(graph, labels);
-}
+    changePeriod();
+};
+
+function changePeriod() {
+    activeCard = document.querySelector('.active-card');
+    graph = activeCard.querySelector('.weather__grafic');
+    let daysCheckbox = activeCard.querySelectorAll('.weather__checkbox');
+    for (let i = 0; i < 2; i++) {
+        daysCheckbox[i].addEventListener('click', (e) => {
+            period = +e.target.value;
+            if (lat !== 100) {
+                weatherClear();
+                activeCard = document.querySelector('.active-card');
+                console.log(labels, hour);
+                graph = activeCard.querySelector('.weather__grafic');
+                scaleConstructor();
+                createChart(graph, labels);
+            }
+        })
+    }
+};
 
 cardSwither();
 
 function weatherClear() {
     let graficCard = document.querySelector('.active-card');
-    grafic = graficCard.querySelector('.weather__grafic-container').innerHTML = `<canvas class="weather__grafic" id="myChart"></canvas>`;
+    graficCard.querySelector('.weather__grafic-container').innerHTML = `<canvas class="weather__grafic" id="myChart"></canvas>`;
 };
 
 function createChart(grafic, lab) {
@@ -162,7 +194,7 @@ function createChart(grafic, lab) {
         data: {
             labels: lab,
             datasets: [{
-                label: `${nameCity}`,
+                label: `${navigationArray[count].nameCity}`,
                 data: hour,
                 borderWidth: 2
             }]
@@ -179,14 +211,53 @@ function createChart(grafic, lab) {
 
 btnAddCard.addEventListener('click', (e) => {
     cardsArray = document.querySelectorAll('.weather__card');
+    console.log(cardsArray.length);
     if (cardsArray.length < 5) {
         hideCards();
         newCardCreator();
+        locationFinder();
         createCard();
         addPagination();
         cardSwither();
     } else {
         e.target.classList.add('hide');
+    }
+
+    if (cardsArray.length === 5) {
+        e.target.classList.add('hide');
+    }
+});
+
+
+
+removeBtn.addEventListener('click', (e) => {
+    let conf = confirm("Delete this card?");
+    if (conf) {
+        cardsArray = document.querySelectorAll('.weather__card');
+        let btnsPagination = document.querySelectorAll('.weather__switch-button');
+        for (let i = 0; i < btnsPagination.length; i++) {
+            if (btnsPagination[i].classList.contains('btn-active')) {
+                if (btnsPagination.length === 1) {
+                    btnsPagination[i].closest('.weather__item-swither').remove();
+                    cardsArray[i].remove();
+                    navigationBar.classList.add('hide');
+                } else {
+                    btnsPagination[i - 1].classList.add('btn-active');
+                    cardsArray[i - 1].classList.add('active-card');
+                    cardsArray[i - 1].classList.remove('hide');
+                    count = i - 1;
+                    btnsPagination[i].closest('.weather__item-swither').remove();
+                    cardsArray[i].remove();
+                    cardsArray = document.querySelectorAll('.weather__card');
+                    btnsPagination = document.querySelectorAll('.weather__switch-button');
+                    for (let i = 0; i < btnsPagination.length; i++) {
+                        btnsPagination[i].textContent = i + 1;
+                    }
+                    cardSwither();
+                    break;
+                }
+            }
+        };
     }
 });
 
@@ -194,7 +265,15 @@ function removeActive() {
     let btnsPagination = document.querySelectorAll('.weather__switch-button');
     for (let i = 0; i < btnsPagination.length; i++) {
         btnsPagination[i].classList.remove('btn-active');
-        console.log(btnsPagination[i]);
+    }
+};
+
+function locationFinder() {
+    cardsArray = document.querySelectorAll('.weather__card');
+    for (let i = 0; i < cardsArray.length; i++) {
+        if (cardsArray[i].classList.contains('active-card')) {
+            count = i;
+        }
     }
 }
 
@@ -208,8 +287,10 @@ function cardSwither() {
             cardsArray[i].classList.remove('active-card');
             cardsArray[i].classList.add('hide');
         };
+        count = btnsPagination.length - 1;
         cardsArray[btnsPagination.length - 1].classList.add('active-card');
         cardsArray[btnsPagination.length - 1].classList.remove('hide');
+        changePeriod();
     })
 }
 
@@ -234,8 +315,62 @@ function hideCards() {
 
 function newCardCreator() {
     cards = document.querySelector('.weather__cards');
-    cards.insertAdjacentHTML('beforeend', `${cardHTML}`);
+    let num1 = Math.floor(Math.random() * 1000);
+    let num2 = Math.floor(Math.random() * 1000);
+    cards.insertAdjacentHTML('beforeend', `<li class="weather__card active-card">
+    <div class="weather__card-info">
+        <h3 class="weather__card-name"></h3>
+        <ul class="weather__card-list">
+            <li class="weather__card-item"><span
+                    class="weather__card-subtitle">Temperature:</span> <span
+                    class="weather__card-det"></span></li>
+            <li class="weather__card-item"><span class="weather__card-subtitle">Feels
+                    like:</span> <span class="weather__card-det"></span></li>
+            <li class="weather__card-item"><span
+                    class="weather__card-subtitle">Humidity:</span>
+                <span class="weather__card-det"></span>
+            </li>
+            <li class="weather__card-item"><span
+                    class="weather__card-subtitle">Pressure:</span>
+                <span class="weather__card-det"></span>
+            </li>
+            <li class="weather__card-item"><span class="weather__ardt-subtitle">Wind
+                    speed:</span> <span class="weather__card-det"></span></li>
+            <li class="weather__card-item"><span
+                    class="weather__card-subtitle">Description:</span> <span
+                    class="weather__card-det"></span></li>
+        </ul>
+    </div>
+    <div class="weather__grafics-wrapper">
+        <div class="weather__grafic-container">
+            <canvas class="weather__grafic" id="myChart"></canvas>
+        </div>
+        <div class="weather__period">
+            <label class="weather__label" for="d${num1}">1 day
+                <input class="weather__checkbox" type="radio" name="field" id="d${num1}" value="1"
+                    checked>
+                <span class="weather__check-style"></span>
+            </label>
+    
+            <label class="weather__label" for="${num2}">5 days
+                <input class="weather__checkbox" type="radio" name="field" id="${num2}"
+                    value="5">
+                <span class="weather__check-style"></span>
+            </label>
+        </div>
+    </div>
+    </li>`);
 };
+
+function addToDataArray() {
+    navigationArray[count] = {
+        'hourly': hourly,
+        'week': week,
+        'weatherToday': weatherToday,
+        'nameCity': nameCity
+    };
+    console.log(navigationArray);
+}
 
 function scaleConstructor() {
     labels = [];
@@ -244,7 +379,7 @@ function scaleConstructor() {
         let data = new Date().getHours();
 
         for (let i = 0; i <= 23; i++) {
-            hour.push(Math.round(hourly[i].temp));
+            hour.push(Math.round(navigationArray[count].hourly[i].temp));
         }
         let start = data;
         for (i = 1; i <= 24; i++) {
@@ -263,7 +398,7 @@ function scaleConstructor() {
         let data = new Date().getDay();
         for (let i = 1; i <= 5; i++) {
             let dayNow = dayOfWeek[data];
-            hour.push(Math.round(week[i].temp.eve));
+            hour.push(Math.round(navigationArray[count].week[i].temp.eve));
             labels.push(`${dayNow}`);
             if (data === 6) {
                 data = 0;

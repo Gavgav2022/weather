@@ -352,9 +352,6 @@ html {
     border: 1px solid black;
     border-radius: 3px;
 }
-.hide {
-    display: none;
-}
 .weather__card-name {
     background-color: rgb(255, 100, 0, 0.75);
     text-align: center;
@@ -403,5 +400,9 @@ html {
 
 .weather__card-remove {
     justify-self: end;
+}
+
+.hide {
+    display: none;
 }
   
