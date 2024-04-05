@@ -242,6 +242,7 @@ removeBtn.addEventListener('click', (e) => {
                     cardsArray[i].remove();
                     navigationBar.classList.add('hide');
                 } else {
+                    navigationBar.classList.remove('hide');
                     btnsPagination[i - 1].classList.add('btn-active');
                     cardsArray[i - 1].classList.add('active-card');
                     cardsArray[i - 1].classList.remove('hide');
