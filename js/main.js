@@ -22,26 +22,6 @@ class="weather__switch-button btn-active"></button>
 </li>`;
 let inputElement = document.querySelector('.weather__city-input');
 let formWeather = document.forms.weatherForm;
-
-function favoritMover() {
-    activeCard = document.querySelector('.card-active');
-    let btnFavorit = activeCard.querySelector('.weather__btn-favorit');
-    btnFavorit.addEventListener('click', (e) => {
-        let parentCard = btnFavorit.closest('.weather__card');
-        parentCard.classList.toggle('favorit');
-        cardsArray = document.querySelectorAll('.weather__card');
-        arrayFavorit = [];
-        for (let i = 0; i < cardsArray.length; i++) {
-            if (cardsArray[i].classList.contains('favorit')) {
-                arrayFavorit[i] = navigationArray[i];
-                console.log(arrayFavorit);
-            }
-        }
-    })
-};
-formWeather.addEventListener('submit', (e) => {
-    e.preventDefault();
-});
 let locStor = JSON.parse(localStorage.getItem('cards'));
 const informWindow = document.querySelector('.weather__input-info');
 
@@ -165,6 +145,29 @@ function createNewCard(counter) {
     </li>`;
 };
 
+function favoritMover() {
+    activeCard = document.querySelector('.card-active');
+    let btnFavorit = activeCard.querySelector('.weather__btn-favorit');
+    btnFavorit.addEventListener('click', (e) => {
+        e.target.classList.toggle('active-favorite');
+        let parentCard = btnFavorit.closest('.weather__card');
+        parentCard.classList.toggle('favorit');
+        cardsArray = document.querySelectorAll('.weather__card');
+        arrayFavorit = [];
+        let number = 0;
+        for (let i = 0; i < cardsArray.length; i++) {
+            if (cardsArray[i].classList.contains('favorit')) {
+                arrayFavorit[number] = navigationArray[i];
+                number++;
+                console.log(arrayFavorit);
+            }
+        }
+    })
+};
+formWeather.addEventListener('submit', (e) => {
+    e.preventDefault();
+});
+
 function periodSwither() {
     activeCard = document.querySelector('.card-active');
     let periodBtns = activeCard.querySelectorAll('.weather__period-btn');
@@ -255,7 +258,6 @@ function createGraph() {
 function insertCard() {
     cards = document.querySelector('.weather__cards');
     cards.insertAdjacentHTML('beforeend', `${card}`);
-    favoritMover();
 }
 
 
@@ -309,6 +311,7 @@ async function group() {
     await getWeather(navigationArray[count].lat, navigationArray[count].lon)
     createNewCard(count);
     insertCard();
+    favoritMover();
     showHideNavigation()
     createGraph();
     periodSwither();
@@ -391,6 +394,7 @@ async function buildFromLocalStor() {
     await getWeatherLoc(navigationArray[count].lat, navigationArray[count].lon)
     createNewCard(count);
     insertCard();
+    favoritMover();
     showHideNavigation()
     createGraph();
     periodSwither();
@@ -539,7 +543,6 @@ function inputReader() {
                         if (cardsArray.length === count) {
                             btnAddCard.classList.remove('hide');
                         }
-                        favoritMover();
                     });
                 }
             })
@@ -549,3 +552,4 @@ function inputReader() {
         informWindow.textContent = 'More then 2 symbols!'
     };
 };
+

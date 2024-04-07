@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/reset.css">
+    <link rel="stylesheet" href="./css/style.css">
+    <title>Weather</title>
+</head>
+
+<body>
+    <div class="wrapper">
+        <header class="header">
+            <div class="container">
+                <div class="header__inner">
+                    <div class="logo">
+                        <a href="" class="logo__link">
+                            <img src="./images/logo.svg" alt="" class="logo__img">
+                        </a>
+                    </div>
+                    <nav class="menu">
+                        <ul class="menu__list">
+                            <li class="menu__item">
+                                <span class="menu__item-title">
+                                    <a href="#" class="menu__link">
+                                        Home
+                                    </a>
+                                </span>
+                            </li>
+                            <li class="menu__item">
+                                <span class="menu__item-title">
+                                    <a href="#" class="menu__link">
+                                        Maps
+                                    </a>
+                                </span>
+                                <ul class="menu__sublist">
+                                    <li class="menu__subitem">
+                                        <a href="#" class="menu__sublink">
+                                            Europe
+                                        </a>
+                                    </li>
+                                    <li class="menu__subitem">
+                                        <a href="#" class="menu__sublink">
+                                            Asia
+                                        </a>
+                                    </li>
+                                    <li class="menu__subitem">
+                                        <a href="#" class="menu__sublink">
+                                            Africa
+                                        </a>
+                                    </li>
+                                    <li class="menu__subitem">
+                                        <a href="#" class="menu__sublink">
+                                            America
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="menu__item">
+                                <span class="menu__item-title">
+                                    <a href="#" class="menu__link">
+                                        Favorit
+                                    </a>
+                                </span>
+                            </li>
+                        </ul>
+                    </nav>
+                    <div class="header__curt">
+                        <a href="" class="header__curt-link">
+                            Buy
+                        </a>
+                    </div>
+                    <div class="burger-wrapper">
+                        <button class="burger">
+                            <span class="burger__line"></span>
+                            <span class="sr-only">Open menu</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <main class="main">
+            <section class="weather">
+                <div class="container">
+                    <div class="weather__inner">
+                        <div class="weather__head">
+
+                        </div>
+                        <form action="" class="weather__form" name="weatherForm">
+                            <div class="weather__parameters">
+                                <h2 class="weather__search-title">Enter city name:</h2>
+                                <div class="weather__input-wrapper">
+                                    <input class="weather__city-input" type="text" id="cityInput"
+                                        placeholder="Check city...">
+                                    <span class="weather__input-info"></span>
+                                </div>
+                            </div>
+                        </form>
+
+                        <ul id="suggestions"></ul>
+                        <div class="weather__cards-wrapper">
+                            <div class="weather__main-navigation hide">
+                                <ul class="weather__list-switch">
+                                </ul>
+                                <button class="weather__add-btn">New card</button>
+                                <button class="weather__card-remove">Remove card</button>
+                            </div>
+                            <ul class="weather__cards">
+                            </ul>
+                            <div class="weather__info">
+                                <p class="weather__info-text">
+                                    Please, check city!
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <footer class="footer">
+            <div class="container">
+                <div class="footer__inner">
+                    <div class="footer__info">
+                        <a href="" class="footer__logo">
+                            <img src="./images/logo.svg" alt="логотип магазину" class="footer__img">
+                        </a>
+                        <p class="footer__text"> LOGO - погода по всьому світу!
+                        </p>
+                        <div class="footer__info-dev">
+                            <span class="footer__developer">
+                                Розробка сайтів —
+                            </span>
+                            <a href="#" class="footer__link-dev">
+                                <img src="./images/footer-dev.png" alt="логотип розробників сайта"
+                                    class="footer__img-dev">
+                            </a>
+                        </div>
+
+                    </div>
+                    <ul class="footer__list">
+                        <li class="footer__item">
+                            <h3 class="foooter__subtitle">Навигація</h3>
+                            <ul class="footer__menu">
+                                <li class="footer__subitem">
+                                    <a href="#" class="footer__link">Головна</a>
+                                </li>
+                                <li class="footer__subitem">
+                                    <a href="#" class="footer__link">Про компанію</a>
+                                </li>
+                                <li class="footer__subitem">
+                                    <a href="#" class="footer__link">Товари</a>
+                                </li>
+                                <li class="footer__subitem">
+                                    <a href="#" class="footer__link">Контакти</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="footer__item">
+                            <h3 class="foooter__subtitle">Подтримка</h3>
+                            <ul class="footer__menu">
+                                <li class="footer__subitem">
+                                    <a href="#" class="footer__link">FAQ</a>
+                                </li>
+                                <li class="footer__subitem">
+                                    <a href="#" class="footer__link">Блог</a>
+                                </li>
+                                <li class="footer__subitem">
+                                    <a href="#" class="footer__link">Зворотний зв'язок</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="footer__item">
+                            <h3 class="foooter__subtitle">Контакти</h3>
+                            <a class="menu__link-top footer__social" href="#">м. Харків, вул. Мироносицька 10а</a>
+                            <a class="menu__link-top footer__social" href="tel:380999908100">+38 (099) 990-81-00 (viber,
+                                telegram)</a>
+                            <div class="menu__top-socials footer__smm">
+                                <a href="" class="menu__link-social">
+                                    <img class="menu__top-logo-1" src="./images/face.png" alt="facebook">
+                                </a>
+                                <a href="" class="menu__link-social">
+                                    <img class="menu__top-logo-2" src="./images/insta.png" alt="instagram">
+                                </a>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="./js/main.js"></script>
+</body>
+
+</html>
