@@ -261,6 +261,30 @@ main {
 .weather__period {
     display: flex;
     align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.weather__period-btn {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    font-size: 16px;
+    border-radius: 6px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: all .3s;
+}
+
+.weather__period-btn:hover {
+    background-color: red;
+    color: yellow;
+}
+
+.weather__card-info {
+    min-width: 25%;
 }
 
 .weather__city {
@@ -323,7 +347,7 @@ main {
     margin-bottom: 20px;
 }
 
-.weather__btn-add {
+.weather__btn-favorit {
     padding: 10px 15px;
     background-color: blue;
     color: white;
@@ -332,6 +356,7 @@ main {
     border-radius: 5px;
     font-size: 14px;
     line-height: 120%;
+    justify-self: end;
 }
 
 .weather__grafics-wrapper {
@@ -422,6 +447,35 @@ main {
 
 .weather__card-remove {
     justify-self: end;
+}
+
+.weather__info {
+    font-size: 20px;
+    font-weight: 700;
+    max-width: 300px;
+    max-height: 400px;
+    margin: 0 auto;
+}
+
+.weather__info-text {
+    text-align: center;
+    padding: 20px;
+    background-color: yellow;
+    box-shadow: 0px 2px 3px 2px black;
+    border-radius: 5px;
+    color: blue;
+    max-width: 250px;
+    max-height: 200px;
+}
+
+.weather__input-wrapper {
+    display: flex;
+    flex-direction: column;
+}
+
+.weather__input-info {
+    color: orangered;
+    font-weight: 700;
 }
 
 .hide {

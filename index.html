@@ -91,9 +91,11 @@
                         <form action="" class="weather__form" name="weatherForm">
                             <div class="weather__parameters">
                                 <h2 class="weather__search-title">Enter city name:</h2>
-
-                                <input class="weather__city-input" type="text" id="cityInput"
-                                    placeholder="Check city...">
+                                <div class="weather__input-wrapper">
+                                    <input class="weather__city-input" type="text" id="cityInput"
+                                        placeholder="Check city...">
+                                    <span class="weather__input-info"></span>
+                                </div>
                             </div>
                         </form>
 
@@ -101,21 +103,22 @@
                         <div class="weather__cards-wrapper">
                             <div class="weather__main-navigation hide">
                                 <ul class="weather__list-switch">
-                                    <li class="weather__item-swither"><button
-                                            class="weather__switch-button btn-active">1</button>
-                                    </li>
                                 </ul>
                                 <button class="weather__add-btn">New card</button>
                                 <button class="weather__card-remove">Remove card</button>
                             </div>
-                            <ul class="weather__cards hide">
+                            <ul class="weather__cards">
                             </ul>
+                            <div class="weather__info">
+                                <p class="weather__info-text">
+                                    Please, check city!
+                                </p>
+                            </div>
                         </div>
                     </div>
                 </div>
             </section>
         </main>
-
 
         <footer class="footer">
             <div class="container">
