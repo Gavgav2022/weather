@@ -8,6 +8,7 @@ let graph;
 let activeCard;
 let weatherToday = [];
 let arrayFavorit = [];
+let btnFavorit;
 let weatherParam = document.querySelectorAll('.weather__card-det');
 const btnAddCard = document.querySelector('.weather__add-btn');
 const switcherList = document.querySelector('.weather__list-switch');
@@ -147,7 +148,7 @@ function createNewCard(counter) {
 
 function favoritMover() {
     activeCard = document.querySelector('.card-active');
-    let btnFavorit = activeCard.querySelector('.weather__btn-favorit');
+    btnFavorit = activeCard.querySelector('.weather__btn-favorit');
     btnFavorit.addEventListener('click', (e) => {
         e.target.classList.toggle('active-favorite');
         let parentCard = btnFavorit.closest('.weather__card');
@@ -157,16 +158,25 @@ function favoritMover() {
         let number = 0;
         for (let i = 0; i < cardsArray.length; i++) {
             if (cardsArray[i].classList.contains('favorit')) {
+                navigationArray[i].fav = true;
                 arrayFavorit[number] = navigationArray[i];
                 number++;
-                console.log(arrayFavorit);
+            } else {
+                navigationArray[i].fav = false;
             }
+            addToLocalStorege();
         }
     })
 };
-formWeather.addEventListener('submit', (e) => {
-    e.preventDefault();
-});
+
+if (formWeather) {
+    formWeather.addEventListener('submit', (e) => {
+        e.preventDefault();
+    });
+}
+
+
+
 
 function periodSwither() {
     activeCard = document.querySelector('.card-active');
@@ -195,7 +205,7 @@ function scaleConstructor() {
             hour.push(Math.round(navigationArray[count].hourly[i].temp));
         }
         let start = data;
-        for (i = 1; i <= 24; i++) {
+        for (let i = 1; i <= 24; i++) {
             data++;
             if (data === start) {
                 labels.push(`${data}:00`);
@@ -288,9 +298,12 @@ async function getWeatherLoc(latit, longi) {
     }
 };
 
-cityInput.addEventListener('input', function () {
-    inputReader();
-});
+if (cityInput) {
+    cityInput.addEventListener('input', function () {
+        inputReader();
+    });
+}
+
 
 async function cardsEditor() {
     cardsArray = document.querySelectorAll('.weather__card');
@@ -303,6 +316,7 @@ async function cardsEditor() {
     periodSwither();
     switchBtnNumeration();
     btnSwitchAction();
+    favoritMover();
     addToLocalStorege();
 };
 
@@ -327,7 +341,8 @@ function addToNavigation(num) {
         'nameCity': nameCity,
         'weekly': weekly,
         'hourly': hourly,
-        'weatherToday': weatherToday
+        'weatherToday': weatherToday,
+        'fav': ''
     };
 };
 
@@ -346,7 +361,6 @@ function cardRemover() {
         if (cardsArray[i].classList.contains('card-active')) {
             cardsArray[i].remove();
             navigationArray.splice(i, 1);
-            console.log(navigationArray, 'rem');
             addToLocalStorege();
         }
     };
@@ -368,13 +382,14 @@ removeBtn.addEventListener('click', (e) => {
 
 function addToLocalStorege() {
     localStorage.setItem('cards', JSON.stringify(navigationArray));
-    console.log(navigationArray);
 };
 
 if (locStor) {
     navigationArray = locStor;
     startBuilder();
-    infoText.classList.add('hide')
+    if (infoText) {
+        infoText.classList.add('hide')
+    }
 };
 
 async function startBuilder() {
@@ -390,7 +405,6 @@ async function startBuilder() {
 
 
 async function buildFromLocalStor() {
-    console.log(navigationArray);
     await getWeatherLoc(navigationArray[count].lat, navigationArray[count].lon)
     createNewCard(count);
     insertCard();
@@ -400,36 +414,44 @@ async function buildFromLocalStor() {
     periodSwither();
     switchBtnNumeration();
     btnSwitchAction();
-    activeCard = document.querySelector('.card-active');
+    if (navigationArray[count].fav === true) {
+        activeCard = document.querySelector('.card-active');
+        activeCard.classList.add('favorit')
+        btnFavorit = activeCard.querySelector('.weather__btn-favorit');
+        if (activeCard.classList.contains('favorit')) {
+            btnFavorit.classList.add('active-favorite');
+        }
+    }
     activeCard.classList.remove('card-active');
     activeCard.classList.add('hide');
-    console.log(count);
 };
 
+if (btnAddCard) {
+    btnAddCard.addEventListener('click', (e) => {
+        cardsArray = document.querySelectorAll('.weather__card');
+        if (cardsArray.length >= 5) {
+            alert('5 cards max, remove one card!')
+        } else {
+            activeCard = document.querySelector('.card-active');
+            activeCard.classList.remove('card-active');
+            activeCard.classList.add('hide');
+            count = cardsArray.length;
+            cards.classList.add('hide');
+            infoText.classList.remove('hide');
+            navigationBar.classList.add('hide');
+            e.target.classList.add('hide');
+        }
 
-btnAddCard.addEventListener('click', (e) => {
-    cardsArray = document.querySelectorAll('.weather__card');
-    if (cardsArray.length >= 5) {
-        alert('5 cards max, remove one card!')
-    } else {
-        activeCard = document.querySelector('.card-active');
-        activeCard.classList.remove('card-active');
-        activeCard.classList.add('hide');
-        count = cardsArray.length;
-        cards.classList.add('hide');
-        infoText.classList.remove('hide');
-        navigationBar.classList.add('hide');
-        e.target.classList.add('hide');
-    }
+    });
+}
 
-});
 
 function switchBtnNumeration() {
     cardsArray = document.querySelectorAll('.weather__card');
     switcherList.innerHTML = ``;
     for (let i = 0; i < cardsArray.length; i++) {
         switcherList.insertAdjacentHTML('beforeend', `<li class="weather__item-swither"><button
-        class="weather__switch-button">${i+1}</button>
+        class="weather__switch-button">${i + 1}</button>
         </li>`);
     }
 };
@@ -452,56 +474,58 @@ function btnSwitchAction() {
         })
     }
 };
+if (inputElement) {
+    inputElement.addEventListener('keydown', function (event) {
+        // Проверяем, была ли нажата клавиша Enter (код клавиши 13)
+        if (event.code === 'Enter') {
+            let inputValue = cityInput.value;
 
-inputElement.addEventListener('keydown', function (event) {
-    // Проверяем, была ли нажата клавиша Enter (код клавиши 13)
-    if (event.code === 'Enter') {
-        let inputValue = cityInput.value;
+            // Очистка предыдущих результатов
+            suggestions.innerHTML = '';
 
-        // Очистка предыдущих результатов
-        suggestions.innerHTML = '';
-
-        if (inputValue.length > 2) {
-            cityInput.style.backgroundColor = 'transparent';
-            informWindow.textContent = '';
-            // Запрос к API Nominatim для получения городов
-            fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${inputValue}`)
-                .then(response => response.json())
-                .then(data => {
-                    data.forEach(city => {
-                        const li = document.createElement('li');
-                        li.classList.add('weather__city');
-                        li.setAttribute('lat', city.lat);
-                        li.setAttribute('lon', city.lon);
-                        li.textContent = `${city.display_name}`;
-                        suggestions.appendChild(li);
-                    });
-                    let location = document.querySelectorAll('.weather__city');
-                    let velue = location[0];
-                    lat = +velue.getAttribute('lat');
-                    lon = +velue.getAttribute('lon');
-                    nameCity = velue.textContent;
-                    suggestions.innerHTML = '';
-                    cardsArray = document.querySelectorAll('.weather__card');
-                    cards.classList.remove('hide');
-                    infoText.classList.add('hide');
-                    if (cardsArray[count]) {
-                        cardsEditor();
-                    } else {
-                        group();
-                    };
-                    cardsArray = document.querySelectorAll('.weather__card');
-                    if (cardsArray.length === count) {
-                        btnAddCard.classList.remove('hide');
-                    }
-                })
-                .catch(error => console.error('Ошибка:', error));
-        } else {
-            cityInput.style.backgroundColor = 'red';
-            informWindow.textContent = 'More then 2 symbols!'
+            if (inputValue.length > 2) {
+                cityInput.style.backgroundColor = 'transparent';
+                informWindow.textContent = '';
+                // Запрос к API Nominatim для получения городов
+                fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${inputValue}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        data.forEach(city => {
+                            const li = document.createElement('li');
+                            li.classList.add('weather__city');
+                            li.setAttribute('lat', city.lat);
+                            li.setAttribute('lon', city.lon);
+                            li.textContent = `${city.display_name}`;
+                            suggestions.appendChild(li);
+                        });
+                        let location = document.querySelectorAll('.weather__city');
+                        let velue = location[0];
+                        lat = +velue.getAttribute('lat');
+                        lon = +velue.getAttribute('lon');
+                        nameCity = velue.textContent;
+                        suggestions.innerHTML = '';
+                        cardsArray = document.querySelectorAll('.weather__card');
+                        cards.classList.remove('hide');
+                        infoText.classList.add('hide');
+                        if (cardsArray[count]) {
+                            cardsEditor();
+                        } else {
+                            group();
+                        };
+                        cardsArray = document.querySelectorAll('.weather__card');
+                        if (cardsArray.length === count) {
+                            btnAddCard.classList.remove('hide');
+                        }
+                    })
+                    .catch(error => console.error('Ошибка:', error));
+            } else {
+                cityInput.style.backgroundColor = 'red';
+                informWindow.textContent = 'More then 2 symbols!'
+            }
         }
-    }
-});
+    });
+}
+
 
 function inputReader() {
     let inputValue = cityInput.value;
@@ -552,4 +576,3 @@ function inputReader() {
         informWindow.textContent = 'More then 2 symbols!'
     };
 };
-

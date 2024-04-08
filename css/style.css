@@ -369,6 +369,7 @@ main {
 }
 
 .weather__card {
+    display: flex;
     justify-content: space-between;
     gap: 30px;
     width: 100%;
@@ -377,10 +378,7 @@ main {
     background-color: #fff;
     box-shadow: 0px 2px 3px 2px gray;
     border-radius: 5px;
-}
-
-.weather__card {
-    display: flex;
+    transition: all .3s;
 }
 
 .weather__content-title {
@@ -517,6 +515,9 @@ main {
     border-radius: 5px;
 }
 
+.favorit {
+    background-color: rgba(32, 206, 119, 0.5);
+}
 .footer {
     position: relative;
     color: #ffff;
