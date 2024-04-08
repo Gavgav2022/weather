@@ -370,6 +370,7 @@ main {
 
 .weather__card {
     display: flex;
+    margin-bottom: 10px;
     justify-content: space-between;
     gap: 30px;
     width: 100%;

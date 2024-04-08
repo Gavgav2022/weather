@@ -450,6 +450,7 @@ if (btnAddCard) {
 
 function favoritChecker() {
     if (favoritWeather) {
+        navigationBar.classList.add('hide');
         cardsArray = document.querySelectorAll('.weather__card');
         console.log(cardsArray);
         for (let i = 0; i < cardsArray.length; i++) {
@@ -457,6 +458,8 @@ function favoritChecker() {
                 cardsArray[i].classList.add('hide');
             } else {
                 cardsArray[i].classList.remove('hide');
+                let favBtn = cardsArray[i].querySelector('.weather__btn-favorit');
+                favBtn.classList.add('hide');
             }
         }
     };
