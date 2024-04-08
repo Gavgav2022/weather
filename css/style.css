@@ -635,6 +635,10 @@ main {
         align-items: center;
     }
 
+    .weather {
+        margin-top: 70px;
+    }
+
     .header::after {
         position: absolute;
         content: '';
@@ -667,6 +671,7 @@ main {
     }
 
     .header__inner {
+        height: 70px;
         position: relative;
         z-index: 2;
     }
