@@ -424,9 +424,9 @@ async function buildFromLocalStor() {
             btnFavorit.classList.add('active-favorite');
         }
     }
+    favoritChecker();
     activeCard.classList.remove('card-active');
     activeCard.classList.add('hide');
-    favoritChecker();
 };
 
 if (btnAddCard) {
@@ -452,8 +452,8 @@ function favoritChecker() {
     if (favoritWeather) {
         navigationBar.classList.add('hide');
         cardsArray = document.querySelectorAll('.weather__card');
-        console.log(cardsArray);
         for (let i = 0; i < cardsArray.length; i++) {
+            
             if (!cardsArray[i].classList.contains('favorit')) {
                 cardsArray[i].classList.add('hide');
             } else {
@@ -462,6 +462,7 @@ function favoritChecker() {
                 favBtn.classList.add('hide');
             }
         }
+        cardsArray[cardsArray.length-1].classList.add('hide');
     };
 };
 

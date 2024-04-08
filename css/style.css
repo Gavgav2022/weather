@@ -1,5 +1,5 @@
 html {
-    font-family: Open Sans, Helvetica, sans-serif;
+    font-family: 'Open Sans', Helvetica, sans-serif;
 }
 
 html, body {
@@ -7,17 +7,20 @@ html, body {
 }
 
 .sr-only {
-    display: block;
-    width: 0;
-    height: 0;
-    overflow: hidden;
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
     padding: 0;
+    overflow: hidden;
+    clip: rect(0,0,0,0);
+    border: 0;
 }
 
 .wrapper {
-min-height: 100%;
-display: flex;
-flex-direction: column;
+    min-height: 100%;
+    display: flex;
+    flex-direction: column;
 }
 
 main {
@@ -25,11 +28,9 @@ main {
     background-color: #F6F6F8;
 }
 
-
 .lock {
     overflow: hidden;
 }
-
 
 .container {
     max-width: 1200px;
@@ -47,6 +48,7 @@ main {
     background-color: black;
     color: white;
     font-size: 18px;
+    padding: 15px 0;
 }
 
 .header__inner {
@@ -65,17 +67,13 @@ main {
     height: 45px;
     background-color: transparent;
     border: none;
-    transition: all .3s;
+    transition: all 0.3s;
+    cursor: pointer;
 }
 
-.burger.active .burger__line::after {
-    transform: rotate(45deg);
-    top: 0;
-}
-
+.burger.active .burger__line::after,
 .burger.active .burger__line::before {
-    transform: rotate(-45deg);
-    top: 0;
+    transform: rotate(45deg);
 }
 
 .burger.active .burger__line {
@@ -88,29 +86,18 @@ main {
     width: 40px;
     height: 2px;
     background-color: white;
-    transition: all .3s;
+    transition: all 0.3s;
 }
 
-.burger__line::after {
-    position: absolute;
-    content: '';
-    width: 100%;
-    height: 100%;
-    left: 0;
-    top: 15px;
-    background-color: #fff;
-    transition: all .3s;
-}
-
+.burger__line::after,
 .burger__line::before {
     position: absolute;
     content: '';
     width: 100%;
     height: 100%;
     left: 0;
-    top: -15px;
-    background-color: #fff;
-    transition: all .3s;
+    background-color: white;
+    transition: all 0.3s;
 }
 
 .menu {
@@ -130,37 +117,21 @@ main {
 
 .menu__link {
     padding: 5px 10px;
-    z-index: 2;
 }
 
 .menu__sublist {
-    z-index: 1;
     position: absolute;
     padding: 30px 15px;
     top: 40px;
     display: flex;
     flex-direction: column;
     gap: 10px;
-    transform: scale(0);
-    transition: all .3s;
+    transform: scaleY(0);
+    transition: transform 0.3s;
     font-size: 14px;
     border-radius: 5px;
     color: black;
-    background-color: rgb(255, 255, 255, 0.75);
-}
-
-
-
-.menu__item-title {
-    display: flex;
-    min-height: 44px;
-    align-items: center;
-    position: relative;
-    transition: all .3s;
-}
-
-.menu__item:hover .menu__sublist {
-    transform: scale(1);
+    background-color: rgba(255, 255, 255, 0.75);
 }
 
 .menu__item-title::after {
@@ -169,18 +140,21 @@ main {
     width: 100%;
     height: 2px;
     left: 0;
-    z-index: 2;
     bottom: -5px;
     background-color: yellow;
-    transform: scale(0);
-    transition: all .3s;
+    transform: scaleX(0);
+    transition: transform 0.3s;
 }
 
-.menu__item-title:hover::after {
-    transform: scale(1);
+.menu__item:hover .menu__sublist {
+    transform: scaleY(1);
 }
 
-.menu__item-title:hover,
+.menu__item:hover .menu__item-title::after {
+    transform: scaleX(1);
+}
+
+.menu__item:hover .menu__item-title,
 .menu__sublink:hover {
     color: red;
 }
@@ -193,19 +167,15 @@ main {
     height: 60px;
     background-color: yellow;
     color: black;
-    box-shadow: 0px 2px 2px 1px white;
     border-radius: 3px;
-    transition: all .3s;
+    box-shadow: 0px 2px 2px 1px white;
+    transition: all 0.3s;
 }
 
 .header__curt-link:hover {
     box-shadow: 0px 3px 3px 3px white;
     color: white;
     background-color: orange;
-}
-
-.logo {
-    transition: all .3s;
 }
 
 .logo:hover {
@@ -229,7 +199,7 @@ main {
     clip: rect(0 0 0 0);
 }
 
-.weather__checkbox:checked+.weather__check-style {
+.weather__checkbox:checked + .weather__check-style {
     background-color: red;
 }
 
@@ -239,8 +209,7 @@ main {
     position: relative;
     margin-right: 20px;
     background-color: #ccc;
-    z-index: 1;
-    transition: all .3s;
+    transition: all 0.3s;
 }
 
 .weather__check-style {
@@ -251,7 +220,7 @@ main {
     left: 0;
     z-index: -1;
     border-radius: 5px;
-    transition: all .3s;
+    transition: all 0.3s;
 }
 
 .weather__label:hover .weather__check-style {
@@ -266,7 +235,6 @@ main {
 }
 
 .weather__period-btn {
-    display: inline-block;
     padding: 10px 20px;
     background-color: #4CAF50;
     color: white;
@@ -275,12 +243,11 @@ main {
     font-size: 16px;
     border-radius: 6px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    transition: all .3s;
+    transition: all 0.3s;
 }
 
 .weather__period-btn:hover {
     background-color: red;
-    color: yellow;
 }
 
 .weather__card-info {
@@ -296,7 +263,6 @@ main {
     justify-content: space-between;
     align-items: start;
 }
-
 
 #cityList {
     position: absolute;
@@ -322,25 +288,16 @@ main {
     padding: 10px;
     border-radius: 5px;
     border: red 2px solid;
-    transition: all .3s;
+    transition: all 0.3s;
 }
 
-.weather__city-input:hover {
-    border: orange 2px solid;
-    box-shadow: 0px 2px 2px 2px gray;
-    background-color: #fff;
-}
-
-.weather__city-input:active {
-    border: blue 2px solid;
-    outline: none;
-    box-shadow: 0px 2px 3px 2px gray;
-}
-
+.weather__city-input:hover,
+.weather__city-input:active,
 .weather__city-input:focus {
     border: blue 2px solid;
     outline: none;
     box-shadow: 0px 2px 3px 2px gray;
+    background-color: #fff;
 }
 
 .weather__search-title {
@@ -357,7 +314,12 @@ main {
     font-size: 14px;
     line-height: 120%;
     justify-self: end;
-    transition: all .3s;
+    transition: all 0.3s;
+}
+
+.weather__btn-favorit:hover {
+    box-shadow: 0px 2px 4px 4px gray;
+    background-color: greenyellow;
 }
 
 .weather__grafics-wrapper {
@@ -379,7 +341,7 @@ main {
     background-color: #fff;
     box-shadow: 0px 2px 3px 2px gray;
     border-radius: 5px;
-    transition: all .3s;
+    transition: all 0.3s;
 }
 
 .weather__content-title {
@@ -399,7 +361,7 @@ main {
 }
 
 .weather__card-name {
-    background-color: rgb(255, 100, 0, 0.75);
+    background-color: rgba(255, 100, 0, 0.75);
     text-align: center;
     border-radius: 8px;
     padding: 10px;
@@ -410,7 +372,7 @@ main {
     padding: 5px;
     margin-bottom: 5px;
     cursor: pointer;
-    transition: all .3s;
+    transition: all 0.3s;
 }
 
 .weather__city:hover {
@@ -489,7 +451,7 @@ main {
     border-radius: 3px;
     box-shadow: 0px 1px 1px 2px gray;
     margin-right: 10px;
-    transition: all .3s;
+    transition: all 0.3s;
 }
 
 .weather__card-remove {
@@ -502,7 +464,7 @@ main {
 
 .weather__add-btn:hover {
     box-shadow: 0px 2px 4px 4px gray;
-    background-color: greenyellow
+    background-color: greenyellow;
 }
 
 .weather__card-remove:hover {
@@ -519,6 +481,7 @@ main {
 .favorit {
     background-color: rgba(32, 206, 119, 0.5);
 }
+
 .footer {
     position: relative;
     color: #ffff;
@@ -536,7 +499,7 @@ main {
     height: 100%;
     left: 0;
     top: 0;
-    background-color: rgb(0, 0, 0, 0.85);
+    background-color: rgba(0, 0, 0, 0.85);
 }
 
 .footer__inner {
@@ -565,7 +528,6 @@ main {
     gap: 30px;
     flex-wrap: wrap;
 }
-
 
 .footer__subitem {
     margin-bottom: 10px;
@@ -609,7 +571,7 @@ main {
 }
 
 .footer__link {
-    transition: all .3s;
+    transition: all 0.3s;
     padding: 5px;
     border-radius: 3px;
 }
@@ -626,8 +588,7 @@ main {
 
 @media screen and (max-width: 768px) {
     .header {
-      
-        transition: all .3s;
+        transition: all 0.3s;
     }
 
     .weather__card {
@@ -644,7 +605,7 @@ main {
         width: 100%;
         height: 1vh;
         background-color: black;
-        transition: all .3s;
+        transition: all 0.3s;
     }
 
     .menu__sublist {
@@ -659,7 +620,7 @@ main {
         width: 100%;
         height: 100vh;
         background-color: black;
-        transition: all .3s;
+        transition: all 0.3s;
     }
 
     .header__curt {
@@ -685,7 +646,7 @@ main {
         top: -200%;
         opacity: 0;
         left: 40%;
-        transition: all .3s;
+        transition: all 0.3s;
     }
 
     .hero__inner {
@@ -739,7 +700,6 @@ main {
 
     .footer__list {
         flex-direction: column;
-
     }
 
     .footer__info-dev {
