@@ -34,7 +34,7 @@ let weekly = [];
 let labels = [];
 let hour = [];
 let navigationArray = [];
-
+let favoritWeather = document.querySelector('.weather__favorit');
 let urlWeather;
 let period = 1;
 let count = 0;
@@ -146,12 +146,14 @@ function createNewCard(counter) {
     </li>`;
 };
 
+
 function favoritMover() {
     activeCard = document.querySelector('.card-active');
+    console.log(activeCard);
     btnFavorit = activeCard.querySelector('.weather__btn-favorit');
     btnFavorit.addEventListener('click', (e) => {
         e.target.classList.toggle('active-favorite');
-        let parentCard = btnFavorit.closest('.weather__card');
+        let parentCard = e.target.closest('.weather__card');
         parentCard.classList.toggle('favorit');
         cardsArray = document.querySelectorAll('.weather__card');
         arrayFavorit = [];
@@ -424,6 +426,7 @@ async function buildFromLocalStor() {
     }
     activeCard.classList.remove('card-active');
     activeCard.classList.add('hide');
+    favoritChecker();
 };
 
 if (btnAddCard) {
@@ -444,6 +447,20 @@ if (btnAddCard) {
 
     });
 }
+
+function favoritChecker() {
+    if (favoritWeather) {
+        cardsArray = document.querySelectorAll('.weather__card');
+        console.log(cardsArray);
+        for (let i = 0; i < cardsArray.length; i++) {
+            if (!cardsArray[i].classList.contains('favorit')) {
+                cardsArray[i].classList.add('hide');
+            } else {
+                cardsArray[i].classList.remove('hide');
+            }
+        }
+    };
+};
 
 
 function switchBtnNumeration() {
